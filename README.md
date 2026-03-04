@@ -63,6 +63,58 @@ Hérna eru spilapeningarnir okkar
 ![mynd](spilap)
 
 ## Kóðinn
+***
+# https://wokwi.com/projects/441804604337655809
+from machine import Pin
+import neopixel
+from time import sleep_ms
+from random import randint  # til að geta unnið með random
+import time
+from buzzer_music import music
+from time import sleep
+
+# LEDPixel tenging ( IN )
+# S digital pinni
+# V 5V
+# G GND
+
+pin = Pin(8, Pin.OUT)
+np = neopixel.NeoPixel(pin, 24)	# 8 x RGB Leds
+takki1 = Pin(10, Pin.IN, Pin.PULL_UP)
+
+# breytur
+brightness = 53                # birtustig frá 0 - 255
+
+# búum til liti með RGB litakerfi.
+red   =  [ brightness, 153, 2]    # red
+          # ekkert ljós
+song = '0 B4 1 50;1 D5 1 50;2 B5 1 50;3 A5 4 50;8 F#5 1 50;12 E5 1 50;15 B4 1 50;18 E5 6 50;7 G#5 1 50;9 G#5 1 50;10 F#5 1 50;0 B3 1 50;1 D4 1 50;2 B4 1 50;3 A4 4 50;8 F#4 1 50;12 E4 1 50;15 B3 1 50;18 E4 6 50;7 G#4 1 50;9 G#4 1 50;10 F#4 1 50;0 B6 1 50;1 D7 1 50;2 B7 1 50;3 A7 4 50;8 F#7 1 50;12 E7 1 50;15 B6 1 50;18 E7 6 50;7 G#7 1 50;9 G#7 1 50;10 F#7 1 50;0 B5 1 50;1 D6 1 50;2 B6 1 50;3 A6 4 50;8 F#6 1 50;12 E6 1 50;15 B5 1 50;18 E6 6 50;7 G#6 1 50;9 G#6 1 50;10 F#6 1 50;18 E5 6 50;18 E4 6 50;18 E7 6 50;18 E6 6 50;18 E5 6 50;18 E4 6 50;18 E3 6 50;18 E2 6 50;0 B4 1 50;1 D5 1 50;2 B5 1 50;3 A5 4 50;8 F#5 1 50;12 E5 1 50;15 B4 1 50;18 E5 6 50;7 G#5 1 50;9 G#5 1 50;10 F#5 1 50;0 B3 1 50;1 D4 1 50;2 B4 1 50;3 A4 4 50;8 F#4 1 50;12 E4 1 50;15 B3 1 50;18 E4 6 50;7 G#4 1 50;9 G#4 1 50;10 F#4 1 50;0 B2 1 50;1 D3 1 50;2 B3 1 50;3 A3 4 50;8 F#3 1 50;12 E3 1 50;15 B2 1 50;18 E3 6 50;7 G#3 1 50;9 G#3 1 50;10 F#3 1 50;0 B5 1 50;1 D2 1 50;2 B2 1 50;3 A2 4 50;8 F#2 1 50;12 E2 1 50;15 B5 1 50;18 E2 6 50;7 G#2 1 50;9 G#2 1 50;10 F#2 1 50'
+
+
+#One buzzer on pin 0
+mySong = music(song, pins=[Pin(12)])
+
+while True:
+    if takki1.value() == 0:
+        randomLed = randint(0, 23)
+        # stjórnum öllum 8 leds í einu með að nota fill
+        np.fill([0, 0, 0])     # ekkert ljós
+         
+        # led 1  
+        np[randomLed] = red		        # eða np[0] = [255, 0, 0] 
+        np.write()              # kveikjum á led 1
+
+        
+        time.sleep_ms(50)
+    else: 
+        print(mySong.tick())
+        sleep(0.04)
+ *     
+
+    
+
+        
+
 
 
 ## Samþykki fyrir birtingu verkefnis á vef
